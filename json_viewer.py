@@ -33,6 +33,12 @@ PREDICT_TEMPLATE = {
     }
 }
 
+ERROR_TEMPLATE = {
+    'Title': '{}',
+    'SubTitle': None,
+    'IcoPath': 'ui/icon.png',
+}
+
 PYTHON_JSON_TYPE_MAP = {
     "dict": "object",
     "list": "array",
@@ -50,15 +56,6 @@ PYTHON_JSON_TYPE_MAP = {
 class QueryType(Enum):
     SIMPLE = 0
     SEARCH = 1
-    UNFOLD = 2
-
-
-def get_web_handle(browser_name):
-    try:
-        wb = webbrowser.get(using=browser_name)
-    except webbrowser.Error:
-        return None
-    return wb
 
 
 class Main(Wox):
@@ -71,7 +68,7 @@ class Main(Wox):
 
         json_dict = self.load_json(text)
         if json_dict is None:
-            self.add_item(result, "can not read json from clipboard")
+            self.add_item(result, "can not read json from clipboard", template=ERROR_TEMPLATE)
             return result
 
         if query_type == QueryType.SIMPLE:
@@ -105,7 +102,7 @@ class Main(Wox):
                                       subtitle="press enter to show in web browser")
 
         if len(result) == 0:
-            self.add_item(result, "Path error")
+            self.add_item(result, "path error", template=ERROR_TEMPLATE)
 
         return result
 
@@ -122,7 +119,8 @@ class Main(Wox):
         tmp_template['Title'] = tmp_template['Title'].format(title)
         if subtitle is not None:
             tmp_template['SubTitle'] = tmp_template['SubTitle'] = subtitle
-        tmp_template['JsonRPCAction']['parameters'][0] = str(output)
+        if 'JsonRPCAction' in tmp_template.keys():
+            tmp_template['JsonRPCAction']['parameters'][0] = str(output)
         result.append(tmp_template)
 
     def parse_input(self, key):
@@ -131,6 +129,7 @@ class Main(Wox):
         return QueryType.SEARCH, key.strip().split('>')
 
     def parse_text(self, text):
+        text = text.replace("\r\n", "").replace("\n", "").replace("\t", "")
         if text.startswith('\"'):
             # like "{\"a\": 1}"
             return eval(text)
@@ -168,21 +167,31 @@ class Main(Wox):
             return False
         return True
 
+    def get_web_handle(self, browser_name):
+        try:
+            wb = webbrowser.get(using=browser_name)
+        except webbrowser.Error:
+            return None
+        return wb
+
     def create_file_and_open(self, data):
         file_name = "data.json"
         with open("./" + file_name, mode='w') as f:
             f.write(data)
         current_path = os.getcwd()
-        wb = get_web_handle('google-chrome')
+        wb = self.get_web_handle('google-chrome')
         if wb is None:
-            wb = get_web_handle('chrome')
+            wb = self.get_web_handle('chrome')
         if wb is None:
-            wb = get_web_handle('windows-default')
-        wb.open(current_path + "/" + file_name)
-        WoxAPI.change_query(current_path + "/" + file_name)
+            wb = self.get_web_handle('windows-default')
+        wb.open(current_path + "/" + file_name)  # clean
+        self.change_query("")
 
     def change_query(self, text):
         WoxAPI.change_query(text)
+
+    def hide_app(self):
+        WoxAPI.hide_app()
 
     def get_type_name(self, item):
         type_str = str(type(item))
