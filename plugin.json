@@ -1,0 +1,12 @@
+{
+  "ID":"b338606883ff11edbb5e744ca1ab2efe",
+  "ActionKeyword": "json",
+  "Name": "JSON Viewer",
+  "Description": "An wxox workflow help you to get a good json view.",
+  "Author": "KTY",
+  "Version": "1.0.0",
+  "Language": "python",
+  "Website": "https://github.com/kongtianyi/wox-jsonviewer",
+  "IcoPath": "ui\\icon.png",
+  "ExecuteFileName": "json_viewer.py"
+}
