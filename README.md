@@ -4,6 +4,14 @@ A wox plugin help you to get a good json view.
 
 Get JSON from clipboard then show it in Chrome.
 
+You can just download it use wpm.
+
+```
+wpm install TimeConvertor
+```
+
+Plugin Page: http://www.wox.one/plugin/408
+
 ## Depends
 * Google Chrome
 * (Optional)Google Chrome JSON Plugin(choose either one)
