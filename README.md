@@ -15,12 +15,14 @@ Get JSON from clipboard then show it in Chrome.
 
 ### Basic
 
+![Animation1](https://user-images.githubusercontent.com/15275771/209464780-0181a043-c6e0-4b5a-8479-98f4756c656c.gif)
 
 1. Copy a JSON object into your clipboard
 2. Input `json` then press enter key
 
 ### Find Sub JSON Object
 
+![Animation](https://user-images.githubusercontent.com/15275771/209464788-5a5a3d63-e49e-46f2-a966-9baeb06aa38f.gif)
 
 1. Copy a JSON object into your clipboard
 2. Input `json`
@@ -33,5 +35,5 @@ Get JSON from clipboard then show it in Chrome.
 1. Chrome JSON plugin needs to turn on local file switch.
  ![image](https://user-images.githubusercontent.com/15275771/209463344-d4810765-429f-4e0d-b00c-025150869ea3.png)
 2. Windows need choose Chrome as default application of `.json`.
- 
+ ![image](https://user-images.githubusercontent.com/15275771/209464847-5b64abcb-0303-4a5b-b3f4-0688cc850423.png)
 4. Mac version: [alfred-jsonviewer](https://github.com/kongtianyi/alfred-jsonviewer/blob/main/README.md)
