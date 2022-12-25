@@ -31,4 +31,7 @@ Get JSON from clipboard then show it in Chrome.
 
 ## Tips
 1. Chrome JSON plugin needs to turn on local file switch.
-2. Mac version: [alfred-jsonviewer](https://github.com/kongtianyi/alfred-jsonviewer/blob/main/README.md)
+ ![image](https://user-images.githubusercontent.com/15275771/209463344-d4810765-429f-4e0d-b00c-025150869ea3.png)
+2. Windows need choose Chrome as default application of `.json`.
+ 
+4. Mac version: [alfred-jsonviewer](https://github.com/kongtianyi/alfred-jsonviewer/blob/main/README.md)
